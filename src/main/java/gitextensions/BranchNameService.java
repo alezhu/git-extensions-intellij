@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Service
+@Service(Service.Level.PROJECT)
 public final class BranchNameService {
 
     private static final String GIT_DIR_PREFIX = "gitdir:";
