@@ -76,7 +76,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <applicationService serviceImplementation="gitextensions.GitExtensionsService"/>
-        <applicationConfigurable instance="gitextensions.ui.GitExtensionsSettingsConfigurable"/>
+        <applicationConfigurable instance="gitextensions.ui.GitExtensionsSettingsConfigurable" displayName="GitExtensions"/>
     </extensions>
 
     <actions>
