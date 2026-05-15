@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import gitextensions.BranchNameService;
 import gitextensions.GitExtensionsService;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -55,9 +55,9 @@ public class Commit extends BaseAction implements CustomComponentAction {
     }
 
     @Override
-    public void beforeActionPerformedUpdate(@NotNull AnActionEvent e) {
+    public void actionPerformed(@NotNull AnActionEvent e) {
         FileDocumentManager.getInstance().saveAllDocuments();
-        super.beforeActionPerformedUpdate(e);
+        super.actionPerformed(e);
     }
 
     @NotNull
