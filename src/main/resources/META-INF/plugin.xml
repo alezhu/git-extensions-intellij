@@ -2,7 +2,7 @@
     <id>com.dmitryzhelnin.intellij.plugin.gitextensions</id>
     <name>GitExtensions</name>
     <vendor url="https://github.com/DmitryZhelnin/git-extensions-intellij">Dmitry Zhelnin</vendor>
-    <version>0.4.5-az</version>
+    <version>0.4.6-az</version>
 
     <description><![CDATA[
     Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from IDEs based on the IntelliJ platform
@@ -11,6 +11,12 @@
     <change-notes><![CDATA[
       <p>
         <ul>
+            <li>0.4.6</li>
+            <ul>
+                <li>Adapt to IntelliJ platform 262.* (2026.2.*)
+                <li>Fix usages of deprecated API
+                <li>Minimum supported version of IntelliJ platform is 233.0 (2023.3)
+            </ul>
           <li>0.4.5</li>
           <ul>
             <li>Fix usages of deprecated API</li>
@@ -69,14 +75,14 @@
       ]]>
     </change-notes>
 
-    <idea-version since-build="223.*"/>
+<!--    <idea-version since-build="223.*"/>-->
 
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <applicationService serviceImplementation="gitextensions.GitExtensionsService"/>
-        <applicationConfigurable instance="gitextensions.ui.GitExtensionsSettingsConfigurable"/>
+        <applicationConfigurable instance="gitextensions.ui.GitExtensionsSettingsConfigurable" displayName="GitExtensions"/>
     </extensions>
 
     <actions>

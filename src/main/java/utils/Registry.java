@@ -9,7 +9,7 @@ public class Registry {
 
     /**
      * Reads specified key from the location in the Windows registry
-     * Method origin: https://stackoverflow.com/a/5902131/2189031
+     * Method origin: <a href="https://stackoverflow.com/a/5902131/2189031">link</a>
      */
     @Nullable
     public static String read(String location, String key)

@@ -2,7 +2,6 @@ package gitextensions;
 
 import com.google.common.base.Strings;
 import com.intellij.ide.util.PropertiesComponent;
-import com.intellij.openapi.components.ServiceManager;
 import org.jetbrains.annotations.Nullable;
 import utils.Registry;
 
@@ -59,4 +58,3 @@ public class GitExtensionsService {
     }
 
 }
-

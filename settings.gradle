@@ -1,2 +1,18 @@
+
+plugins {
+    id("org.jetbrains.intellij.platform.settings").version("2.16.0")
+}
+
 rootProject.name = 'git-extensions-plugin'
 
+dependencyResolutionManagement {
+    // Configure all projects' repositories
+    repositories {
+        mavenCentral()
+
+        // IntelliJ Platform Gradle Plugin Repositories Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-repositories-extension.html
+        intellijPlatform {
+            defaultRepositories()
+        }
+    }
+}

@@ -1,21 +1,27 @@
 plugins {
-    id "org.jetbrains.intellij" version "1.17.2"
+//    id "org.jetbrains.intellij" version "1.17.4"
+    id("org.jetbrains.intellij.platform")
 }
 
 group 'com.dmitryzhelnin.intellij.plugin.git.extensions'
-version '0.4.5-az'
+version '0.4.6-az'
 
-sourceCompatibility = 17
+//sourceCompatibility = 17
 
 repositories {
     mavenCentral()
+
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-}
+    intellijPlatform {
+//        intellijIdeaCommunity '2023.3'
+        intellijIdea '262.4852.50'
 
-intellij {
-    version = '2022.3'
-    updateSinceUntilBuild  = false
+        bundledPlugin 'com.intellij.java'
+    }
+    testImplementation "junit:junit:4.13.2"
 }
