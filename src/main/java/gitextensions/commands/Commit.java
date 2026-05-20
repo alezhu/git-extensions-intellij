@@ -56,7 +56,11 @@ public class Commit extends BaseAction implements CustomComponentAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        FileDocumentManager.getInstance().saveAllDocuments();
+        try {
+            FileDocumentManager.getInstance().saveAllDocuments();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         super.actionPerformed(e);
     }
 
