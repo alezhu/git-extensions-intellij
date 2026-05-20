@@ -16,7 +16,7 @@ java {
 }
 
 group = "com.dmitryzhelnin.intellij.plugin.git.extensions"
-version = "0.4.7-az"
+version = "0.4.8-az"
 
 dependencies {
     testImplementation("junit:junit:4.13.2")

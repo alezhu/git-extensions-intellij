@@ -2,7 +2,7 @@
     <id>com.dmitryzhelnin.intellij.plugin.gitextensions</id>
     <name>GitExtensions</name>
     <vendor url="https://github.com/DmitryZhelnin/git-extensions-intellij">Dmitry Zhelnin</vendor>
-    <version>0.4.7-az</version>
+    <version>0.4.8-az</version>
 
     <description><![CDATA[
     Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from IDEs based on the IntelliJ platform
@@ -11,6 +11,10 @@
     <change-notes><![CDATA[
       <p>
         <ul>
+            <li>0.4.8</li>
+            <ul>
+                <li>Adapt toolbar to NewUI
+            </ul>
             <li>0.4.7</li>
             <ul>
                 <li>Fix minimum supported version of IntelliJ platform is 233.0 (2023.3)
@@ -162,6 +166,7 @@
             <reference ref="GitExtensions.Settings"/>
             <separator/>
             <add-to-group group-id="MainToolBar" anchor="last"/>
+            <add-to-group group-id="MainToolbarRight" anchor="last"/>
             <add-to-group group-id="NavBarToolBar" anchor="last"/>
         </group>
     </actions>
