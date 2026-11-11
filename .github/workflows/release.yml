@@ -1,0 +1,71 @@
+name: Release and Sync Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-release:
+    name: Build, Release and Sync
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build plugin
+        run: ./gradlew buildPlugin
+
+      - name: Upload built artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-extensions-plugin
+          path: ./build/distributions/*.zip
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -n "$GITHUB_REF_NAME" ] && [[ "$GITHUB_REF_NAME" =~ ^v.* ]]; then
+            gh release create "$GITHUB_REF_NAME" \
+              --title "$GITHUB_REF_NAME" \
+              --generate-notes \
+              ./build/distributions/* || true
+          fi
+
+      # Sync to central IntelliJ plugins repository
+      - name: Sync to Central Repository
+        env:
+          CENTRAL_REPO_PAT: ${{ secrets.CENTRAL_REPO_PAT }}
+        run: |
+          if [ -z "$CENTRAL_REPO_PAT" ]; then
+            echo "CENTRAL_REPO_PAT secret is not configured. Skipping sync to central repository."
+            exit 0
+          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git clone https://x-access-token:${CENTRAL_REPO_PAT}@github.com/alezhu/intellij-plugins-repo.git central-repo
+          mkdir -p central-repo/plugins
+          rm -f central-repo/plugins/git-extensions-plugin-*.zip
+          cp ./build/distributions/*.zip central-repo/plugins/
+          cd central-repo
+          git add plugins/
+          git commit -m "Update GitExtensions to ${GITHUB_REF_NAME:-manual}" || exit 0
+          git push origin main
